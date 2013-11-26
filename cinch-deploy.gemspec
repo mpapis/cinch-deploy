@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'cinch-deploy'
-  s.version     = '1.0.4'
+  s.version     = '1.0.5'
   s.license     = 'Apache 2.0'
   s.summary     =
   s.description = 'A Cinch plugin to start deploy process via irc messages.'
