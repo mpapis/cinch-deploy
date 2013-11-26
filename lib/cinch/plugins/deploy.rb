@@ -10,7 +10,7 @@ module Cinch
         @running = true
         config[:configurations].each do |config|
           if config[:channels].include?(m.channel.to_s) and config[:users].include?(m.user.nick) and m.message =~ Regexp.new(config[:trigger])
-            IO.popen("config[:command] 2>&1") do |handle|
+            IO.popen("#{config[:command]} 2>&1") do |handle|
               while line = handle.gets
                 m.reply line, true
               end
