@@ -4,7 +4,7 @@ module Cinch
       include Cinch::Plugin
 
       def initialize(*args)
-        super(*args)
+        super
         @running = {}
       end
 
@@ -14,7 +14,7 @@ module Cinch
         config[:configurations].each do |config|
           deploy(m) if can_deploy?(m)
         end
-      rescue Exception => e
+      rescue StandardError => e
         m.reply "exception - #{e.message}", true
         exception(e)
       end
