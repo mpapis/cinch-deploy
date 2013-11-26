@@ -12,7 +12,8 @@ module Cinch
           if config[:channels].include?(m.channel.to_s) and config[:users].include?(m.user.nick) and m.message =~ Regexp.new(config[:trigger])
             IO.popen("#{config[:command]} 2>&1") do |handle|
               while line = handle.gets
-                m.reply "#{config[:command]} > #{line}", true
+                # do not use ,true for nick, it breaks on split
+                m.reply "#{m.user.nick}: #{config[:command]} > #{line}"
               end
             end
           end
