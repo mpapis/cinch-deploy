@@ -19,6 +19,8 @@ module Cinch
             m.reply "ch:#{m.channel.to_s} usr:#{m.user.nick} msg:#{m.message}", true
           end
         end
+      rescue Exception => e
+        m.reply "exception: #{e.message}"
       ensure
         @running = nil
       end
