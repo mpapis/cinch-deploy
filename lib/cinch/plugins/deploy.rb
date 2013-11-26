@@ -19,6 +19,7 @@ module Cinch
             m.reply "ch:#{m.channel.to_s} usr:#{m.user.nick} msg:#{m.message}", true
           end
         end
+      ensure
         @running = nil
       end
 
