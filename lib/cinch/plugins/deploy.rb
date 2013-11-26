@@ -3,7 +3,8 @@ module Cinch
     class Deploy
       include Cinch::Plugin
 
-      def initialize
+      def initialize(*args)
+        super(*args)
         @running = {}
       end
 
