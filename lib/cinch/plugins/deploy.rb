@@ -12,7 +12,7 @@ module Cinch
 
       def listen(m)
         config[:configurations].each do |config|
-          deploy(m) if can_deploy?(m)
+          deploy(config[:command], m) if can_deploy?(config, m)
         end
       rescue StandardError => e
         m.reply "exception - #{e.message}", true
@@ -21,13 +21,13 @@ module Cinch
 
     private
 
-      def can_deploy?(m)
+      def can_deploy?(config, m)
         config[:channels].include?(m.channel.to_s) &&
         config[:users].include?(m.user.nick) &&
         m.message =~ Regexp.new(config[:trigger])
       end
 
-      def deploy(m)
+      def deploy(command, m)
         return if @running[command]
         @running[command] = true
         IO.popen("#{command} 2>&1") do |handle|
@@ -37,10 +37,6 @@ module Cinch
         end
       ensure
         @running.delete(command)
-      end
-
-      def command
-        config[:command]
       end
 
     end
